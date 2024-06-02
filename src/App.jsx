@@ -1,9 +1,9 @@
 import React from 'react'
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
-import  Form  from './components/Form/Index'
-import Genre from './components/Genre/Index'
-import Movies from './components/Movies/Index'
-import Info from './components/Info/Index'
+import  Form  from './Pages/Form/Index'
+import Genre from './Pages/Genre/Index'
+import Movies from './Pages/Movies/Index'
+import Info from './Pages/Info/Index'
 
 
 function App() {
