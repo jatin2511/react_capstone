@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 function Newscard() {
     const [newsdata, setNewsData] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     async function fetchnews() {
         const url = 'https://newsapi.org/v2/everything?q=tesla&from=2024-05-07&sortBy=publishedAt&apiKey=885384aca4dc4eaeaeb212bc327a1a6c';
@@ -23,15 +25,38 @@ function Newscard() {
     }
 
     useEffect(() => {
-        async function fetchdata() {
+        async function fetchData() {
+            setLoading(true);
+            setError(null);
             const data = await fetchnews();
-            setNewsData((pre)=>({...pre,imageurl:data.urlToImage}));
-            setNewsData((pre)=>({...pre,title:data.title}));
-            setNewsData((pre)=>({...pre,content:data.content}));
-            
+            if (data) {
+                setNewsData({
+                    imageUrl: data.urlToImage,
+                    title: data.title,
+                    content: data.content,
+                });
+            } else {
+                setError('Failed to load news data');
+            }
+            setLoading(false);
         }
-        fetchdata();
+        fetchData();
     }, []);
+    if (loading) {
+        return (
+            <div className='h-full w-full flex justify-center items-center'>
+                <p>Loading...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className='h-full w-full flex justify-center items-center'>
+                <p>{error}</p>
+            </div>
+        );
+    }
    
     return (
         <div className='h-full w-full border-inherit'>
