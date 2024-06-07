@@ -62,7 +62,7 @@ const movies = [
   },
   {
     id: 8,
-    category: "Science-Fiction",
+    category: "Fiction",
     color:"bg-[#6CD061]",
     theme:fiction
   }
@@ -71,7 +71,7 @@ function Index() {
   const navigate=useNavigate();
   function handlenavigate(){
     localStorage.setItem("selectedmovies",JSON.stringify(selectedmovie))
-    navigate("/movies")
+    navigate("/info")
   }
   const [selectedmovie,setselectedmovie]=useState([]);
   return (
